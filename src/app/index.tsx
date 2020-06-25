@@ -10,10 +10,16 @@ import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 
-import { GlobalStyle } from '../styles/global-styles';
+import { GlobalStyle } from 'styles/global-styles';
 
 import { HomePage } from './containers/HomePage/Loadable';
-import { NotFoundPage } from './containers/NotFoundPage/Loadable';
+import { NotFoundPage } from './components/NotFoundPage/Loadable';
+import {
+  FinishedTag,
+  PendingTag,
+  ErrorTag,
+} from './components/status-tag/loadable';
+import { BookTable } from './components/book-table/loadable';
 
 export function App() {
   return (
@@ -26,7 +32,11 @@ export function App() {
       </Helmet>
 
       <Switch>
-        <Route exact path={process.env.PUBLIC_URL + '/'} component={HomePage} />
+        <Route exact path="/" component={HomePage} />
+        <Route exact path="/status_tag/finished" component={FinishedTag} />
+        <Route exact path="/status_tag/pending" component={PendingTag} />
+        <Route exact path="/status_tag/error" component={ErrorTag} />
+        <Route exact path="/book_table" component={BookTable} />
         <Route component={NotFoundPage} />
       </Switch>
       <GlobalStyle />
