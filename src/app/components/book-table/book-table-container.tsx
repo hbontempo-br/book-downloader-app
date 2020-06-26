@@ -41,53 +41,6 @@ const queryFunc = (
   );
 };
 
-// const sampleRequest = (
-//   page: number,
-//   pageSize: number,
-//   orderBy?: string,
-//   orderDirection?: string,
-//   search?: string,
-// ): Promise<BookTableResultData> => {
-//   return new Promise<BookTableResultData>((resolve, reject) => {
-//     const sampleData: BookTableItemData[] = [
-//       {
-//         name: 'Book1',
-//         url: 'Baran',
-//         status: 'finished',
-//         downloadAction: () => {
-//           alert('DownloadAction');
-//         },
-//       },
-//       {
-//         name: 'Book2',
-//         url: 'Baran',
-//         status: 'pending',
-//         downloadAction: () => {
-//           alert('DownloadAction');
-//         },
-//       },
-//       {
-//         name: 'Book1',
-//         url: 'Baran',
-//         status: 'error',
-//         downloadAction: () => {
-//           alert('DownloadAction');
-//         },
-//       },
-//     ];
-//     const response = {
-//       data: sampleData,
-//       page: page,
-//       totalCount: 44,
-//     };
-//     // console.log(response);
-//     console.log(response);
-//     resolve(response);
-//   });
-// };
-
 export const BookTable: React.FunctionComponent = memo(() => {
-  return (
-    <BookTableView pageSize={10} width={'700px'} dataFunction={queryFunc} />
-  );
+  return <BookTableView pageSize={10} dataFunction={queryFunc} />;
 });

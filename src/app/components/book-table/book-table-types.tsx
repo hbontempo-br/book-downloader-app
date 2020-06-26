@@ -2,7 +2,6 @@ import { QueryResult } from 'material-table';
 
 export interface BookTableViewProps {
   pageSize: number;
-  width: string;
   dataFunction: (
     page: number,
     pageSize: number,
