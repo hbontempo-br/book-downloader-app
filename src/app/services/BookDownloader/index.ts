@@ -46,9 +46,11 @@ export const GetBook = (bookKey: string): Promise<Book> => {
 
 export const GetPaginatedBookList = (
   name?: string,
-  status?: 'finished' | 'pending' | 'error',
+  status?: string,
   page?: number,
   pageSize?: number,
+  orderBy?: string,
+  orderDirection?: string,
 ): Promise<PaginatedBookList> => {
   return bookDownloaderInstance
     .request<PaginatedBookList>({
