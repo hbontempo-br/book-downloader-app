@@ -15,21 +15,27 @@ import { GlobalStyle } from 'styles/global-styles';
 import { HomePage } from './components/homepage/Loadable';
 import { NotFoundPage } from './components/NotFoundPage/Loadable';
 
+import { Provider } from 'react-redux';
+
+import store from './store';
+
 export function App() {
   return (
-    <BrowserRouter>
-      <Helmet
-        titleTemplate="%s - React Boilerplate"
-        defaultTitle="React Boilerplate"
-      >
-        <meta name="description" content="A React Boilerplate application" />
-      </Helmet>
+    <Provider store={store}>
+      <BrowserRouter>
+        <Helmet
+          titleTemplate="%s - React Boilerplate"
+          defaultTitle="React Boilerplate"
+        >
+          <meta name="description" content="A React Boilerplate application" />
+        </Helmet>
 
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route component={NotFoundPage} />
-      </Switch>
-      <GlobalStyle />
-    </BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route component={NotFoundPage} />
+        </Switch>
+        <GlobalStyle />
+      </BrowserRouter>
+    </Provider>
   );
 }

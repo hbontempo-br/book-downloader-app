@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 import applyCaseMiddleware from 'axios-case-converter';
 
 interface Book {
@@ -17,7 +17,7 @@ interface Pagination {
   totalRows: number;
 }
 
-interface PaginatedBookList {
+export interface PaginatedBookList {
   data: Book[];
   pagination: Pagination;
 }
@@ -52,6 +52,15 @@ export const GetPaginatedBookList = (
   orderBy?: string,
   orderDirection?: string,
 ): Promise<PaginatedBookList> => {
+  console.log(
+    'GetPaginatedBookList',
+    name,
+    status,
+    page,
+    pageSize,
+    orderBy,
+    orderDirection,
+  );
   return bookDownloaderInstance
     .request<PaginatedBookList>({
       method: 'GET',

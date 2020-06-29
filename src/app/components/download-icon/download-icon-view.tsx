@@ -9,7 +9,11 @@ export const DownloadIcon: React.FunctionComponent<DownloadIconProps> = memo(
     const classes = downloadIconStyles(props);
 
     return (
-      <IconButton onClick={props.onClick} disabled={props.isDisabled}>
+      <IconButton
+        onClick={props.onClick}
+        disabled={props.isDisabled}
+        className={classes.root}
+      >
         <CloudDownload />
       </IconButton>
     );
