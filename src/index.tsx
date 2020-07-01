@@ -18,14 +18,12 @@ import { App } from 'app';
 
 import { HelmetProvider } from 'react-helmet-async';
 
-// Initialize languages
-import './locales/i18n';
-
 const MOUNT_NODE = document.getElementById('root') as HTMLElement;
 
 interface Props {
   Component: typeof App;
 }
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const ConnectedApp = ({ Component }: Props) => (
   <HelmetProvider>
     <React.StrictMode>
@@ -33,20 +31,10 @@ const ConnectedApp = ({ Component }: Props) => (
     </React.StrictMode>
   </HelmetProvider>
 );
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const render = (Component: typeof App) => {
   ReactDOM.render(<ConnectedApp Component={Component} />, MOUNT_NODE);
 };
-
-if (module.hot) {
-  // Hot reloadable translation json files and app
-  // modules.hot.accept does not accept dynamic dependencies,
-  // have to be constants at compile-time
-  module.hot.accept(['./app', './locales/i18n'], () => {
-    ReactDOM.unmountComponentAtNode(MOUNT_NODE);
-    const App = require('./app').App;
-    render(App);
-  });
-}
 
 render(App);
 

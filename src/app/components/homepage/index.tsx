@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { BookTable } from '../book-table/loadable';
 
-export function HomePage() {
+export function HomePage(): JSX.Element {
   return (
     <>
       <Helmet>

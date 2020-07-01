@@ -19,12 +19,6 @@ export const booksReducer: Reducer<BooksState> = (
 ): BooksState => {
   switch (action.type) {
     case BooksActionTypes.FILTER_REQUEST:
-      console.log('FilterAction', action);
-      console.log(
-        'FilterAction - filter/pagination',
-        action.payload.filter,
-        action.payload.pagination,
-      );
       return {
         ...state,
         filter: action.payload.filter,

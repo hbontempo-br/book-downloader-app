@@ -1,13 +1,9 @@
 import { createStore, applyMiddleware, Store } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import { BooksState } from './books/types';
 
 import rootReducer from './rootReducer';
 import rootSaga from './rootSaga';
-
-export interface ApplicationState {
-  booksState: BooksState;
-}
+import { ApplicationState } from './rootTypes';
 
 const sagaMiddleware = createSagaMiddleware();
 

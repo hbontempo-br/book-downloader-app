@@ -4,9 +4,10 @@
  *
  */
 
-import { lazyLoad } from 'utils/loadable';
+// TODO: Not able to use absolute path on import. Fix.
+import { lazyLoad } from '../../../utils/loadable';
 
 export const GenericStatusTag = lazyLoad(
   () => import('./index'),
-  module => module.DownloadIcon,
+  (module) => module.DownloadIcon,
 );

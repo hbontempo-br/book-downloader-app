@@ -17,6 +17,16 @@ export const BookTableView: React.FunctionComponent<BookTableProps> = (
 ) => {
   const classes = bookTableStyles();
 
+  const {
+    rowsPerPageOptions,
+    count,
+    rowsPerPage,
+    page,
+    onChangePage,
+    onChangeRowsPerPage,
+    data,
+  } = props;
+
   const header: Header = {
     name: 'Name',
     url: 'URL',
@@ -30,34 +40,32 @@ export const BookTableView: React.FunctionComponent<BookTableProps> = (
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell /* TODO: Add Style */>{header.name}</TableCell>
-              <TableCell /* TODO: Add Style */>{header.url}</TableCell>
-              <TableCell /* TODO: Add Style */>{header.status}</TableCell>
-              <TableCell /* TODO: Add Style */>{header.download}</TableCell>
+              <TableCell>{header.name}</TableCell>
+              <TableCell>{header.url}</TableCell>
+              <TableCell>{header.status}</TableCell>
+              <TableCell>{header.download}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {props.data.map(row => {
-              return (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.rowId}>
-                  <TableCell /* TODO: Add Style */>{row.name}</TableCell>
-                  <TableCell /* TODO: Add Style */>{row.url}</TableCell>
-                  <TableCell /* TODO: Add Style */>{row.status}</TableCell>
-                  <TableCell /* TODO: Add Style */>{row.download}</TableCell>
-                </TableRow>
-              );
-            })}
+            {data.map((row) => (
+              <TableRow hover role="checkbox" tabIndex={-1} key={row.rowId}>
+                <TableCell>{row.name}</TableCell>
+                <TableCell>{row.url}</TableCell>
+                <TableCell>{row.status}</TableCell>
+                <TableCell>{row.download}</TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </TableContainer>
       <TablePagination
-        rowsPerPageOptions={props.rowsPerPageOptions}
+        rowsPerPageOptions={rowsPerPageOptions}
         component="div"
-        count={props.count}
-        rowsPerPage={props.rowsPerPage}
-        page={props.page}
-        onChangePage={props.onChangePage}
-        onChangeRowsPerPage={props.onChangeRowsPerPage}
+        count={count}
+        rowsPerPage={rowsPerPage}
+        page={page}
+        onChangePage={onChangePage}
+        onChangeRowsPerPage={onChangeRowsPerPage}
       />
     </Paper>
   );

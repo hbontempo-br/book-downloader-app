@@ -12,14 +12,13 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 
 import { GlobalStyle } from 'styles/global-styles';
 
+import { Provider } from 'react-redux';
 import { HomePage } from './components/homepage/Loadable';
 import { NotFoundPage } from './components/NotFoundPage/Loadable';
 
-import { Provider } from 'react-redux';
-
 import store from './store';
 
-export function App() {
+export function App(): JSX.Element {
   return (
     <Provider store={store}>
       <BrowserRouter>

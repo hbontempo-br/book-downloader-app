@@ -1,8 +1,8 @@
 import React, { memo } from 'react';
-import { downloadIconStyles } from './download-icon-style';
-import { DownloadIconProps } from './download-icon-types';
 import { IconButton } from '@material-ui/core';
 import { CloudDownload } from '@material-ui/icons';
+import { downloadIconStyles } from './download-icon-style';
+import { DownloadIconProps } from './download-icon-types';
 
 export const DownloadIcon: React.FunctionComponent<DownloadIconProps> = memo(
   (props: DownloadIconProps) => {

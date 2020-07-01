@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { Row } from './book-table-types';
 import { BookTableView } from './book-table-view';
 import { ErrorTag, FinishedTag, PendingTag } from '../status-tag/loadable';
-import { GetBookURL } from '../../services/BookDownloader';
+import { GetBookURL } from '../../services/book-downloader';
 import { DownloadIcon } from '../download-icon';
 
-import { useSelector, useDispatch, shallowEqual } from 'react-redux';
-import { ApplicationState } from '../../store';
 import { filterRequest } from '../../store/books';
+import { ApplicationState } from '../../store/rootTypes';
 
 const selectStatusTag = (status: string): JSX.Element => {
   switch (status) {
@@ -23,37 +23,39 @@ const selectStatusTag = (status: string): JSX.Element => {
 };
 
 const downloadBook = (bookKey: string): void => {
-  GetBookURL(bookKey).then(result => {
+  GetBookURL(bookKey).then((result) => {
     window.open(result, '_blank');
   });
 };
 
 export const BookTable: React.FunctionComponent = () => {
-  const page = useSelector((state: ApplicationState) => {
-    return state.booksState.pagination.page;
-  }, shallowEqual);
-  const rowsPerPage = useSelector((state: ApplicationState) => {
-    return state.booksState.pagination.pageSize;
-  }, shallowEqual);
-  const count = useSelector((state: ApplicationState) => {
-    return state.booksState.totalCount;
-  }, shallowEqual);
-  const books = useSelector((state: ApplicationState) => {
-    return state.booksState.books;
-  }, shallowEqual);
-  const filter = useSelector((state: ApplicationState) => {
-    return state.booksState.filter;
-  }, shallowEqual);
-  // console.log('state', state);
+  const page = useSelector(
+    (state: ApplicationState) => state.booksState.pagination.page,
+    shallowEqual,
+  );
+  const rowsPerPage = useSelector(
+    (state: ApplicationState) => state.booksState.pagination.pageSize,
+    shallowEqual,
+  );
+  const count = useSelector(
+    (state: ApplicationState) => state.booksState.totalCount,
+    shallowEqual,
+  );
+  const books = useSelector(
+    (state: ApplicationState) => state.booksState.books,
+    shallowEqual,
+  );
+  const filter = useSelector(
+    (state: ApplicationState) => state.booksState.filter,
+    shallowEqual,
+  );
   const dispatch = useDispatch();
   const rowsPerPageOptions = [10, 20, 30];
   const pageView = page - 1;
-  // const rowsPerPage = state.pagination.pageSize;
-  // const count = state.totalCount;
 
-  let data: Row[] = books.map(book => {
+  const data: Row[] = books.map((book) => {
     const isDownloadDisabled = book.status !== 'finished';
-    const downloadFunction = () => {
+    const downloadFunction = (): void => {
       if (book.status === 'finished') {
         downloadBook(book.bookKey);
       }
@@ -75,31 +77,22 @@ export const BookTable: React.FunctionComponent = () => {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const updateFilter = (
-    page: number,
-    pageSize: number,
-    name?: string,
-    status?: string,
-    orderBy?: string,
-    orderDirection?: string,
-  ) => {
-    console.log(
-      'update, filter',
-      page,
-      pageSize,
-      name,
-      status,
-      orderBy,
-      orderDirection,
-    );
+    newPage: number,
+    newPageSize: number,
+    newName?: string,
+    newStatus?: string,
+    newOrderBy?: string,
+    newOrderDirection?: string,
+  ): void => {
     dispatch(
       filterRequest(
         {
-          name: name,
-          status: status,
-          orderBy: orderBy,
-          orderDirection: orderDirection,
+          name: newName,
+          status: newStatus,
+          orderBy: newOrderBy,
+          orderDirection: newOrderDirection,
         },
-        { page: page, pageSize: pageSize },
+        { page: newPage, pageSize: newPageSize },
       ),
     );
   };
@@ -108,7 +101,6 @@ export const BookTable: React.FunctionComponent = () => {
     event: React.MouseEvent<HTMLButtonElement> | null,
     newPage: number,
   ): void => {
-    console.log('onChangePage', newPage);
     updateFilter(
       newPage + 1, // Due to paging difference
       rowsPerPage,
@@ -121,8 +113,7 @@ export const BookTable: React.FunctionComponent = () => {
 
   const onChangeRowsPerPage: React.ChangeEventHandler<
     HTMLTextAreaElement | HTMLInputElement
-  > = event => {
-    console.log('onChangeRowsPerPage', event);
+  > = (event) => {
     updateFilter(
       1, // page reset
       +event.target.value,
@@ -134,7 +125,6 @@ export const BookTable: React.FunctionComponent = () => {
   };
 
   useEffect(() => {
-    console.log('DidMount');
     updateFilter(
       page,
       rowsPerPage,
