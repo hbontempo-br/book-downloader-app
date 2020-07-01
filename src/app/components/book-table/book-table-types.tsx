@@ -1,21 +1,29 @@
-import { QueryResult } from 'material-table';
+import * as React from 'react';
 
-export interface BookTableViewProps {
-  pageSize: number;
-  dataFunction: (
+export type ColumnData = string | React.Component | JSX.Element;
+
+export interface BookTableProps {
+  onChangePage: (
+    event: React.MouseEvent<HTMLButtonElement> | null,
     page: number,
-    pageSize: number,
-    orderBy?: string,
-    orderDirection?: string,
-    search?: string,
-  ) => Promise<BookTableResultData>;
+  ) => void;
+  onChangeRowsPerPage: React.ChangeEventHandler<
+    HTMLTextAreaElement | HTMLInputElement
+  >;
+  count: number;
+  rowsPerPage: number;
+  page;
+  data: Row[];
+  rowsPerPageOptions: number[];
 }
 
-export interface BookTableItemData {
-  name: string;
-  url: string;
-  status: string;
-  downloadAction: () => void;
+export interface Header {
+  name: ColumnData;
+  url: ColumnData;
+  status: ColumnData;
+  download: ColumnData;
 }
 
-export type BookTableResultData = QueryResult<BookTableItemData>;
+export interface Row extends Header {
+  rowId: string;
+}

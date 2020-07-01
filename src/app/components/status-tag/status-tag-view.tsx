@@ -1,5 +1,4 @@
 import React, { memo } from 'react';
-import { statusTagStyles } from './status-tag-style';
 import {
   green200,
   green900,
@@ -8,6 +7,7 @@ import {
   yellow100,
   yellow700,
 } from 'material-ui/styles/colors';
+import { statusTagStyles } from './status-tag-style';
 import { StatusTagProps } from './status-tag-types';
 
 export const GenericStatusTag: React.FunctionComponent<StatusTagProps> = memo(
@@ -23,32 +23,22 @@ export const GenericStatusTag: React.FunctionComponent<StatusTagProps> = memo(
   },
 );
 
-export const FinishedTag: React.FunctionComponent = memo(() => {
-  return (
-    <GenericStatusTag
-      status={'Finished'}
-      color={green900}
-      backgroundColor={green200}
-    />
-  );
-});
+export const FinishedTag: React.FunctionComponent = memo(() => (
+  <GenericStatusTag
+    status="Finished"
+    color={green900}
+    backgroundColor={green200}
+  />
+));
 
-export const PendingTag: React.FunctionComponent = memo(() => {
-  return (
-    <GenericStatusTag
-      status={'Pending'}
-      color={yellow700}
-      backgroundColor={yellow100}
-    />
-  );
-});
+export const PendingTag: React.FunctionComponent = memo(() => (
+  <GenericStatusTag
+    status="Pending"
+    color={yellow700}
+    backgroundColor={yellow100}
+  />
+));
 
-export const ErrorTag: React.FunctionComponent = memo(() => {
-  return (
-    <GenericStatusTag
-      status={'Error'}
-      color={redA700}
-      backgroundColor={redA100}
-    />
-  );
-});
+export const ErrorTag: React.FunctionComponent = memo(() => (
+  <GenericStatusTag status="Error" color={redA700} backgroundColor={redA100} />
+));
