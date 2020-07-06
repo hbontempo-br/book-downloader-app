@@ -1,26 +1,23 @@
-import { call, put, select } from 'redux-saga/effects';
+import { call, put } from 'redux-saga/effects';
 import {
   GetPaginatedBookList,
   PaginatedBookList,
 } from '../../services/book-downloader';
 
 import { filterSucceeded, filterFailed } from './actions';
-import { BookData, BooksPagination, BooksState } from './types';
-import { ApplicationState } from '../rootTypes';
+import { BookData, BooksPagination, FilterRequestAction } from './types';
+// import { ApplicationState } from '../rootTypes';
 
-export function* filterBooks() { // eslint-disable-line
+export function* filterBooks(action: FilterRequestAction) { // eslint-disable-line
   try {
-    const booksState: BooksState = yield select(
-      (state: ApplicationState) => state.booksState,
-    ); // This is not safe, what select returns? Not sure...
     const rawResponse: PaginatedBookList = yield call(
       GetPaginatedBookList,
-      booksState.filter.name,
-      booksState.filter.status,
-      booksState.pagination.page,
-      booksState.pagination.pageSize,
-      booksState.filter.orderBy,
-      booksState.filter.orderDirection,
+      action.payload.filter.name,
+      action.payload.filter.status,
+      action.payload.pagination.page,
+      action.payload.pagination.pageSize,
+      action.payload.filter.orderBy,
+      action.payload.filter.orderDirection,
     );
     const totalCount = rawResponse.pagination.totalRows;
     const pagination: BooksPagination = {

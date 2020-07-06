@@ -5,23 +5,29 @@ export enum BooksActionTypes {
   FILTER_FAILED = '@books/FILTER_FAILED',
 }
 
+export type FilterRequestAction = {
+  type: BooksActionTypes.FILTER_REQUEST;
+  payload: {
+    filter: BooksFilter;
+    pagination: BooksPagination;
+  };
+}
+
+export type FilterRequestSucceedAction = {
+  type: BooksActionTypes.FILTER_SUCCEEDED;
+  payload: {
+    books: BookData[];
+    pagination: BooksPagination;
+    totalCount: number;
+  };
+}
+
+export type FilterRequestFailedAction = { type: BooksActionTypes.FILTER_FAILED }
+
 export type BooksAction =
-  | {
-      type: BooksActionTypes.FILTER_REQUEST;
-      payload: {
-        filter: BooksFilter;
-        pagination: BooksPagination;
-      };
-    }
-  | {
-      type: BooksActionTypes.FILTER_SUCCEEDED;
-      payload: {
-        books: BookData[];
-        pagination: BooksPagination;
-        totalCount: number;
-      };
-    }
-  | { type: BooksActionTypes.FILTER_FAILED };
+  | FilterRequestAction
+  | FilterRequestSucceedAction
+  | FilterRequestFailedAction;
 
 // Data types
 export interface BookData {
