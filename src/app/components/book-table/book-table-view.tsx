@@ -31,28 +31,28 @@ export const BookTableView: React.FunctionComponent<BookTableProps> = (
     name: 'Name',
     url: 'URL',
     status: 'Status',
-    download: 'Download',
+    download: '',
   };
 
   return (
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
         <Table>
-          <TableHead>
+          <TableHead className={classes.tableHead}>
             <TableRow>
-              <TableCell>{header.name}</TableCell>
-              <TableCell>{header.url}</TableCell>
-              <TableCell>{header.status}</TableCell>
-              <TableCell>{header.download}</TableCell>
+              <TableCell className={classes.tableHeadColumnName}>{header.name}</TableCell>
+              <TableCell className={classes.tableHeadColumnURL}>{header.url}</TableCell>
+              <TableCell className={classes.tableHeadColumnStatus}>{header.status}</TableCell>
+              <TableCell className={classes.tableHeadColumnDownload}>{header.download}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {data.map((row) => (
-              <TableRow hover role="checkbox" tabIndex={-1} key={row.rowId}>
-                <TableCell>{row.name}</TableCell>
-                <TableCell>{row.url}</TableCell>
-                <TableCell>{row.status}</TableCell>
-                <TableCell>{row.download}</TableCell>
+              <TableRow className={classes.tableBody} hover role="checkbox" tabIndex={-1} key={row.rowId}>
+                <TableCell className={classes.tableBodyColumnName}>{row.name}</TableCell>
+                <TableCell className={classes.tableBodyColumnURL}>{row.url}</TableCell>
+                <TableCell className={classes.tableBodyColumnStatus}>{row.status}</TableCell>
+                <TableCell className={classes.tableBodyColumnDownload}>{row.download}</TableCell>
               </TableRow>
             ))}
           </TableBody>

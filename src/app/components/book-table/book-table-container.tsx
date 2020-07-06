@@ -6,8 +6,7 @@ import { ErrorTag, FinishedTag, PendingTag } from '../status-tag/loadable';
 import { GetBookURL } from '../../services/book-downloader';
 import { DownloadIcon } from '../download-icon';
 
-import { filterRequest } from '../../store/books';
-import { ApplicationState } from '../../store/rootTypes';
+import { selectBookState, filterRequest } from '../../store';
 
 const selectStatusTag = (status: string): JSX.Element => {
   switch (status) {
@@ -29,29 +28,35 @@ const downloadBook = (bookKey: string): void => {
 };
 
 export const BookTable: React.FunctionComponent = () => {
-  const page = useSelector(
-    (state: ApplicationState) => state.booksState.pagination.page,
-    shallowEqual,
-  );
-  const rowsPerPage = useSelector(
-    (state: ApplicationState) => state.booksState.pagination.pageSize,
-    shallowEqual,
-  );
-  const count = useSelector(
-    (state: ApplicationState) => state.booksState.totalCount,
-    shallowEqual,
-  );
-  const books = useSelector(
-    (state: ApplicationState) => state.booksState.books,
-    shallowEqual,
-  );
-  const filter = useSelector(
-    (state: ApplicationState) => state.booksState.filter,
-    shallowEqual,
-  );
+  const {
+    pagination,
+    filter,
+    books,
+    totalCount,
+  } = useSelector(selectBookState, shallowEqual);
+  // const page = useSelector(
+  //   (state: ApplicationState) => booksState.booksState.pagination.page,
+  //   shallowEqual,
+  // );
+  // const rowsPerPage = useSelector(
+  //   (state: ApplicationState) => state.booksState.pagination.pageSize,
+  //   shallowEqual,
+  // );
+  // const count = useSelector(
+  //   (state: ApplicationState) => state.booksState.totalCount,
+  //   shallowEqual,
+  // );
+  // const books = useSelector(
+  //   (state: ApplicationState) => state.booksState.books,
+  //   shallowEqual,
+  // );
+  // const filter = useSelector(
+  //   (state: ApplicationState) => state.booksState.filter,
+  //   shallowEqual,
+  // );
   const dispatch = useDispatch();
   const rowsPerPageOptions = [10, 20, 30];
-  const pageView = page - 1;
+  const pageView = pagination.page - 1;
 
   const data: Row[] = books.map((book) => {
     const isDownloadDisabled = book.status !== 'finished';
@@ -103,7 +108,7 @@ export const BookTable: React.FunctionComponent = () => {
   ): void => {
     updateFilter(
       newPage + 1, // Due to paging difference
-      rowsPerPage,
+      pagination.pageSize,
       filter.name,
       filter.status,
       filter.orderBy,
@@ -126,8 +131,8 @@ export const BookTable: React.FunctionComponent = () => {
 
   useEffect(() => {
     updateFilter(
-      page,
-      rowsPerPage,
+      pagination.page,
+      pagination.pageSize,
       filter.name,
       filter.status,
       filter.orderBy,
@@ -139,10 +144,10 @@ export const BookTable: React.FunctionComponent = () => {
     <BookTableView
       onChangePage={onChangePage}
       onChangeRowsPerPage={onChangeRowsPerPage}
-      rowsPerPage={rowsPerPage}
+      rowsPerPage={pagination.pageSize}
       rowsPerPageOptions={rowsPerPageOptions}
       page={pageView}
-      count={count}
+      count={totalCount}
       data={data}
     />
   );

@@ -1,17 +1,7 @@
-import { createStore, applyMiddleware, Store } from 'redux';
-import createSagaMiddleware from 'redux-saga';
+import store from './rootStore';
 
-import rootReducer from './rootReducer';
-import rootSaga from './rootSaga';
-import { ApplicationState } from './rootTypes';
-
-const sagaMiddleware = createSagaMiddleware();
-
-const store: Store<ApplicationState> = createStore(
-  rootReducer,
-  applyMiddleware(sagaMiddleware),
-); // TODO: Add type for Store for safety
-
-sagaMiddleware.run(rootSaga);
+export type { BooksState, BooksAction, FilterRequestAction } from './books/types';
+export { filterRequest } from './books/actions';
+export { selectBookState } from './rootSelectors';
 
 export default store;
