@@ -20,6 +20,8 @@ export const statusTagStyles = makeStyles((theme: Theme) => createStyles({
     marginRight: '2px',
   },
   text: {
+    display: 'block',
+    whiteSpace: 'nowrap',
     fontFamily: 'Inter',
     fontSize: '12px',
     fontWeight: 900,

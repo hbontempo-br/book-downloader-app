@@ -13,27 +13,36 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import { GlobalStyle } from 'styles/global-styles';
 
 import { Provider } from 'react-redux';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { HomePage } from './components/homepage/Loadable';
 import { NotFoundPage } from './components/NotFoundPage/Loadable';
 
 import store from './store';
 
+const slytes = makeStyles((theme: Theme) => createStyles({
+  root: {
+    backgroundColor: '#FFFFE0',
+  },
+}));
+
 export function App(): JSX.Element {
+  const classes = slytes();
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <Helmet
-          titleTemplate="%s - React Boilerplate"
-          defaultTitle="React Boilerplate"
-        >
-          <meta name="description" content="A React Boilerplate application" />
-        </Helmet>
-
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route component={NotFoundPage} />
-        </Switch>
-        <GlobalStyle />
+        <div className={classes.root}>
+          <Helmet
+            titleTemplate="%s - React Boilerplate"
+            defaultTitle="React Boilerplate"
+          >
+            <meta name="description" content="A React Boilerplate application" />
+          </Helmet>
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route component={NotFoundPage} />
+          </Switch>
+          <GlobalStyle />
+        </div>
       </BrowserRouter>
     </Provider>
   );
