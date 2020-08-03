@@ -3,7 +3,7 @@ import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { Row } from './book-table-types';
 import { BookTableView } from './book-table-view';
 import { ErrorTag, FinishedTag, PendingTag } from '../status-tag/loadable';
-import { GetBookURL } from '../../services/book-downloader';
+import { getBookURL } from '../../services/book-downloader';
 import { DownloadIcon } from '../download-icon';
 
 import { selectBookState, filterRequest } from '../../store';
@@ -22,7 +22,7 @@ const selectStatusTag = (status: string): JSX.Element => {
 };
 
 const downloadBook = (bookKey: string): void => {
-  GetBookURL(bookKey).then((result) => {
+  getBookURL(bookKey).then((result) => {
     window.open(result, '_blank');
   });
 };

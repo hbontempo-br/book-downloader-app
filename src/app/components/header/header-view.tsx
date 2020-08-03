@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { headerStyles } from './header-style';
 import { Logo } from '../logo/loadable';
-import { NewBookForm } from '../new-book-form/new-book-form-view';
+import { NewBookForm } from '../new-book-form';
 
 export const Header: React.FunctionComponent = memo(
   () => {

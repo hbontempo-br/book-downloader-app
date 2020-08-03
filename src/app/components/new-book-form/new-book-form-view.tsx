@@ -1,40 +1,48 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { TextField, Button } from '@material-ui/core';
 import { newBookFormStyles } from './new-book-form-style';
+import { NewBookFormProps } from './new-book-form-types';
 
-export const NewBookForm: React.FunctionComponent = memo(
-  () => {
-    const classes = newBookFormStyles();
-    return (
-      <div className={classes.root}>
-        <TextField
-          className={classes.textField}
-          label="Name"
-          placeholder="BookName.pdf"
-          variant="filled"
-          InputProps={{
-            disableUnderline: true,
-          }}
-          InputLabelProps={{
-            className: classes.textFieldLabel,
-          }}
-          size="small"
-        />
-        <TextField
-          className={classes.textField}
-          label="URL"
-          placeholder=" www.book-to-download.something/stuff/page01_other_stuff"
-          variant="filled"
-          InputProps={{
-            disableUnderline: true,
-          }}
-          InputLabelProps={{
-            className: classes.textFieldLabel,
-          }}
-          size="small"
-        />
-        <Button className={classes.submitButton}>Get Smarter!</Button>
-      </div>
-    );
-  },
-);
+export const NewBookFormView: React.FunctionComponent<NewBookFormProps> = (
+  props: NewBookFormProps,
+) => {
+  const classes = newBookFormStyles();
+  const {
+    nameOnChange, urlOnChange, onSubmit, name, url,
+  } = props;
+  return (
+    <div className={classes.root}>
+      <TextField
+        className={classes.textField}
+        label="Name"
+        placeholder="BookName.pdf"
+        value={name}
+        onChange={nameOnChange}
+        variant="filled"
+        InputProps={{
+          disableUnderline: true,
+        }}
+        InputLabelProps={{
+          className: classes.textFieldLabel,
+        }}
+        size="small"
+      />
+      <TextField
+        className={classes.textField}
+        label="URL"
+        placeholder=" www.book-to-download.something/stuff/page01_other_stuff.png"
+        value={url}
+        onChange={urlOnChange}
+        variant="filled"
+        InputProps={{
+          disableUnderline: true,
+        }}
+        InputLabelProps={{
+          className: classes.textFieldLabel,
+        }}
+        size="small"
+      />
+      <Button className={classes.submitButton} onClick={onSubmit}>Get Smarter!</Button>
+    </div>
+  );
+};
