@@ -1,5 +1,5 @@
 import { Reducer } from 'redux';
-import { BooksState, BooksActionTypes, BooksAction } from './types';
+import { BooksAction, BooksActionTypes, BooksState } from './types';
 
 const INITIAL_STATE: BooksState = {
   books: [],
@@ -41,6 +41,12 @@ export const booksReducer: Reducer<BooksState> = (
         error: true,
         books: [],
       };
+    case BooksActionTypes.NEW_BOOK_REQUEST:
+      return state;
+    case BooksActionTypes.NEW_BOOK_SUCCEEDED:
+      return state;
+    case BooksActionTypes.NEW_BOOK_FAILED:
+      return state;
     default:
       return state;
   }

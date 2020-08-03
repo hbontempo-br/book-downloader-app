@@ -3,6 +3,9 @@ export enum BooksActionTypes {
   FILTER_REQUEST = '@books/FILTER_REQUEST',
   FILTER_SUCCEEDED = '@books/FILTER_SUCCEED',
   FILTER_FAILED = '@books/FILTER_FAILED',
+  NEW_BOOK_REQUEST = '@books/NEW_BOOK_REQUEST',
+  NEW_BOOK_SUCCEEDED = '@books/NEW_BOOK_SUCCEEDED',
+  NEW_BOOK_FAILED = '@books/NEW_BOOK_FAILED',
 }
 
 export type FilterRequestAction = {
@@ -24,10 +27,30 @@ export type FilterRequestSucceedAction = {
 
 export type FilterRequestFailedAction = { type: BooksActionTypes.FILTER_FAILED }
 
+export type NewBookRequestAction = {
+  type: BooksActionTypes.NEW_BOOK_REQUEST,
+  payload: {
+    name: string;
+    mask: string;
+  }
+}
+
+export type NewBookRequestSucceedAction = {
+  type: BooksActionTypes.NEW_BOOK_SUCCEEDED;
+  payload: {
+    book: BookData;
+  };
+}
+
+export type NewBookRequestFailedAction = { type: BooksActionTypes.NEW_BOOK_FAILED }
+
 export type BooksAction =
   | FilterRequestAction
   | FilterRequestSucceedAction
-  | FilterRequestFailedAction;
+  | FilterRequestFailedAction
+  | NewBookRequestAction
+  | NewBookRequestSucceedAction
+  | NewBookRequestFailedAction;
 
 // Data types
 export interface BookData {
