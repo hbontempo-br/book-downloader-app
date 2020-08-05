@@ -37,4 +37,7 @@ export const newBookFormStyles = makeStyles((theme: Theme) => createStyles({
       backgroundColor: yellow700,
     },
   },
+  loadingButton: {
+    color: black,
+  },
 }));

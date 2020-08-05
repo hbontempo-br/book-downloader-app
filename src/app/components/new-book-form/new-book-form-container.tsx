@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { NewBookFormView } from './new-book-form-view';
+import { newBookRequest, selectNewBookState } from '../../store';
 
 export const NewBookForm: React.FunctionComponent = () => {
+  const dispatch = useDispatch();
+  const {
+    loading,
+  } = useSelector(selectNewBookState, shallowEqual);
   const [name, setName] = useState('');
   const [url, setUrl] = useState('');
 
@@ -29,6 +35,7 @@ export const NewBookForm: React.FunctionComponent = () => {
 
   const onSubmit = () => {
     console.log('Submit', name, url);
+    dispatch(newBookRequest(name, url));
   };
 
   return (
@@ -38,6 +45,7 @@ export const NewBookForm: React.FunctionComponent = () => {
       onSubmit={onSubmit}
       name={name}
       url={url}
+      loading={loading}
     />
   );
 };

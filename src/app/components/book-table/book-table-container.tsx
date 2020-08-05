@@ -6,7 +6,7 @@ import { ErrorTag, FinishedTag, PendingTag } from '../status-tag/loadable';
 import { getBookURL } from '../../services/book-downloader';
 import { DownloadIcon } from '../download-icon';
 
-import { selectBookState, filterRequest } from '../../store';
+import { selectBookListState, filterRequest } from '../../store';
 
 const selectStatusTag = (status: string): JSX.Element => {
   switch (status) {
@@ -33,7 +33,7 @@ export const BookTable: React.FunctionComponent = () => {
     filter,
     books,
     totalCount,
-  } = useSelector(selectBookState, shallowEqual);
+  } = useSelector(selectBookListState, shallowEqual);
   // const page = useSelector(
   //   (state: ApplicationState) => booksState.booksState.pagination.page,
   //   shallowEqual,
@@ -46,8 +46,8 @@ export const BookTable: React.FunctionComponent = () => {
   //   (state: ApplicationState) => state.booksState.totalCount,
   //   shallowEqual,
   // );
-  // const books = useSelector(
-  //   (state: ApplicationState) => state.booksState.books,
+  // const book-list = useSelector(
+  //   (state: ApplicationState) => state.booksState.book-list,
   //   shallowEqual,
   // );
   // const filter = useSelector(

@@ -6,4 +6,5 @@ export interface NewBookFormProps {
   onSubmit: (any) => void | undefined;
   name: string;
   url: string;
+  loading: boolean;
 }

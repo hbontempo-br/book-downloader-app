@@ -2,15 +2,13 @@ import { call, put } from 'redux-saga/effects';
 import {
   getPaginatedBookList,
   PaginatedBookList,
-  createBook,
-  Book,
 } from '../../services/book-downloader';
 
 import {
-  filterSucceeded, filterFailed, newBookRequestSucceed, newBookRequestFailed,
+  filterSucceeded, filterFailed,
 } from './actions';
 import {
-  BookData, BooksPagination, FilterRequestAction, NewBookRequestAction,
+  BookData, BooksPagination, FilterRequestAction,
 } from './types';
 // import { ApplicationState } from '../rootTypes';
 
@@ -40,21 +38,5 @@ export function* filterBooks(action: FilterRequestAction) { // eslint-disable-li
     yield put(filterSucceeded(books, pagination, totalCount));
   } catch (err) {
     yield put(filterFailed());
-  }
-}
-
-export function* newBook(action: NewBookRequestAction) { // eslint-disable-line
-  try {
-    const rawResponse: Book = yield createBook(action.payload.name, action.payload.mask);
-    const book: BookData = {
-      name: rawResponse.name,
-      mask: rawResponse.mask,
-      status: rawResponse.status,
-      bookKey: rawResponse.bookKey,
-      createdAt: '',
-    };
-    yield put(newBookRequestSucceed(book));
-  } catch (err) {
-    yield put(newBookRequestFailed());
   }
 }

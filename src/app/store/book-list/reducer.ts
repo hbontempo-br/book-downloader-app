@@ -1,7 +1,7 @@
 import { Reducer } from 'redux';
-import { BooksAction, BooksActionTypes, BooksState } from './types';
+import { BookListAction, BookListActionTypes, BookListState } from './types';
 
-const INITIAL_STATE: BooksState = {
+const INITIAL_STATE: BookListState = {
   books: [],
   filter: {},
   pagination: {
@@ -13,19 +13,19 @@ const INITIAL_STATE: BooksState = {
   loading: false,
 };
 
-export const booksReducer: Reducer<BooksState> = (
-  state: BooksState = INITIAL_STATE,
-  action: BooksAction,
-): BooksState => {
+export const bookListReducer: Reducer<BookListState> = (
+  state: BookListState = INITIAL_STATE,
+  action: BookListAction,
+): BookListState => {
   switch (action.type) {
-    case BooksActionTypes.FILTER_REQUEST:
+    case BookListActionTypes.FILTER_REQUEST:
       return {
         ...state,
         filter: action.payload.filter,
         pagination: action.payload.pagination,
         loading: true,
       };
-    case BooksActionTypes.FILTER_SUCCEEDED:
+    case BookListActionTypes.FILTER_SUCCEEDED:
       return {
         ...state,
         loading: false,
@@ -34,22 +34,14 @@ export const booksReducer: Reducer<BooksState> = (
         pagination: action.payload.pagination,
         totalCount: action.payload.totalCount,
       };
-    case BooksActionTypes.FILTER_FAILED:
+    case BookListActionTypes.FILTER_FAILED:
       return {
         ...state,
         loading: false,
         error: true,
         books: [],
       };
-    case BooksActionTypes.NEW_BOOK_REQUEST:
-      return state;
-    case BooksActionTypes.NEW_BOOK_SUCCEEDED:
-      return state;
-    case BooksActionTypes.NEW_BOOK_FAILED:
-      return state;
     default:
       return state;
   }
 };
-
-export default booksReducer;

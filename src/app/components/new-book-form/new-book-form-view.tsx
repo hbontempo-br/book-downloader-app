@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField, Button } from '@material-ui/core';
+import { TextField, Button, CircularProgress } from '@material-ui/core';
 import { newBookFormStyles } from './new-book-form-style';
 import { NewBookFormProps } from './new-book-form-types';
 
@@ -8,7 +8,7 @@ export const NewBookFormView: React.FunctionComponent<NewBookFormProps> = (
 ) => {
   const classes = newBookFormStyles();
   const {
-    nameOnChange, urlOnChange, onSubmit, name, url,
+    nameOnChange, urlOnChange, onSubmit, name, url, loading,
   } = props;
   return (
     <div className={classes.root}>
@@ -42,7 +42,9 @@ export const NewBookFormView: React.FunctionComponent<NewBookFormProps> = (
         }}
         size="small"
       />
-      <Button className={classes.submitButton} onClick={onSubmit}>Get Smarter!</Button>
+      <Button className={classes.submitButton} onClick={onSubmit} disabled={loading}>
+        {loading ? <CircularProgress className={classes.loadingButton} /> : 'Get Smarter!'}
+      </Button>
     </div>
   );
 };
