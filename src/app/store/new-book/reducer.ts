@@ -29,6 +29,20 @@ export const newBookReducer: Reducer<NewBookState> = (
         loading: false,
         error: true,
       };
+    case NewBookActionTypes.NEW_BOOK_DOWNLOAD_FINISHED:
+      return {
+        ...state,
+        pendingBooks: state.pendingBooks.filter(
+          (pendingBook) => pendingBook !== action.payload.bookKey,
+        ),
+      };
+    case NewBookActionTypes.NEW_BOOK_DOWNLOAD_FAILED:
+      return {
+        ...state,
+        pendingBooks: state.pendingBooks.filter(
+          (pendingBook) => pendingBook !== action.payload.bookKey,
+        ),
+      };
     default:
       return state;
   }

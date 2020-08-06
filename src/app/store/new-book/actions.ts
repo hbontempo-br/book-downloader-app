@@ -15,3 +15,11 @@ export const newBookRequestSucceed = (
 export const newBookRequestFailed = (): NewBookAction => action(
   NewBookActionTypes.NEW_BOOK_REQUEST_FAILED,
 );
+
+export const newBookDownloadSucceed = (
+  bookKey: string,
+): NewBookAction => action(NewBookActionTypes.NEW_BOOK_DOWNLOAD_FINISHED, { bookKey });
+
+export const newBookDownloadFailed = (
+  bookKey: string,
+): NewBookAction => action(NewBookActionTypes.NEW_BOOK_DOWNLOAD_FINISHED, { bookKey });
