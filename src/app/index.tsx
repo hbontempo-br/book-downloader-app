@@ -14,10 +14,13 @@ import { GlobalStyle } from 'styles/global-styles';
 
 import { Provider } from 'react-redux';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { ToastContainer } from 'react-toastify';
 import { HomePage } from './components/homepage/Loadable';
 import { NotFoundPage } from './components/NotFoundPage/Loadable';
 
 import store from './store';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 const slytes = makeStyles((theme: Theme) => createStyles({
   root: {
@@ -43,6 +46,7 @@ export function App(): JSX.Element {
           </Switch>
           <GlobalStyle />
         </div>
+        <ToastContainer autoClose={2000} />
       </BrowserRouter>
     </Provider>
   );

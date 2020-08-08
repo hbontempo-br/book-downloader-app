@@ -1,4 +1,5 @@
 import { Reducer } from 'redux';
+import { toast } from 'react-toastify';
 import { NewBookAction, NewBookActionTypes, NewBookState } from './types';
 
 const INITIAL_STATE: NewBookState = {
@@ -18,18 +19,21 @@ export const newBookReducer: Reducer<NewBookState> = (
         loading: true,
       };
     case NewBookActionTypes.NEW_BOOK_REQUEST_SUCCEEDED:
+      toast.success('Download Started');
       return {
         pendingBooks: [...state.pendingBooks, action.payload.bookKey],
         loading: false,
         error: false,
       };
     case NewBookActionTypes.NEW_BOOK_REQUEST_FAILED:
+      toast.warn('Invalid Download');
       return {
         ...state,
         loading: false,
         error: true,
       };
     case NewBookActionTypes.NEW_BOOK_DOWNLOAD_FINISHED:
+      toast.success('Download Finished');
       return {
         ...state,
         pendingBooks: state.pendingBooks.filter(
@@ -37,6 +41,7 @@ export const newBookReducer: Reducer<NewBookState> = (
         ),
       };
     case NewBookActionTypes.NEW_BOOK_DOWNLOAD_FAILED:
+      toast.error('Download Failed');
       return {
         ...state,
         pendingBooks: state.pendingBooks.filter(
