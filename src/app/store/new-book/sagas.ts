@@ -1,8 +1,9 @@
 import {
-  call,
+  // call,
   put,
   delay,
 } from 'redux-saga/effects';
+import { toast } from 'react-toastify';
 import {
   createBook,
   getBook,
@@ -22,8 +23,10 @@ export function* newBook(action: NewBookRequestAction) { // eslint-disable-line
   try {
     const rawResponse: Book = yield createBook(action.payload.name, action.payload.mask);
     yield put(newBookRequestSucceed(rawResponse.bookKey));
+    yield toast.info('Download Started');
   } catch (err) {
     yield put(newBookRequestFailed());
+    yield toast.error('Invalid Download');
   }
 }
 
@@ -50,15 +53,17 @@ export function* monitorBook( // eslint-disable-line
           console.log('Monitoring: book status = pending');
           break;
         case 'finished':
-          console.log('Monitoring: book status = finished'); // Should call success redux
+          console.log('Monitoring: book status = finished');
           yield put(newBookDownloadSucceed(bookKey));
+          yield toast.success('Download Finished');
           return undefined;
         case 'error':
-          console.log('Monitoring: book status = error'); // Should call error redux
+          console.log('Monitoring: book status = error');
           yield put(newBookDownloadFailed(bookKey));
+          yield toast.error('Download Failed');
           return undefined;
         default:
-          console.log(`Unknown book status = ${rawResponse.status}`); // Should call error redux
+          console.log(`Unknown book status = ${rawResponse.status}`);
           return undefined;
       }
       if (rawResponse.status === 'pending' && (retryTimeout - elapsedTime() < 0)) {
