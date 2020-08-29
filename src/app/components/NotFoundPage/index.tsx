@@ -3,6 +3,9 @@ import styled from 'styled-components/macro';
 import { Helmet } from 'react-helmet-async';
 import { P } from './P';
 
+// TODO: change to a custom or prettier NotFound page. (and use the proper component
+//       nomenclature used on the project)
+
 export function NotFoundPage(): JSX.Element {
   return (
     <>

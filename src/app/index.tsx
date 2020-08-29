@@ -20,6 +20,8 @@ import { NotFoundPage } from './components/NotFoundPage/Loadable';
 
 import store from './store';
 
+// TODO: create a component encapsulating the toast for better organization and easier
+//       library change
 import 'react-toastify/dist/ReactToastify.css';
 
 const slytes = makeStyles((theme: Theme) => createStyles({

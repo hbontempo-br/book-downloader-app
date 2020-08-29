@@ -21,14 +21,16 @@ export const newBookFormStyles = makeStyles((theme: Theme) => createStyles({
     },
   },
   textField: {
-    borderRadius: '15px', // TODO: Fix, not working
+    // TODO: borderRadius is not working as expected on the textField on new-book-form
+    borderRadius: '15px',
     backgroundColor: white,
     width: '100%',
     minWidth: '400px',
     marginBottom: '10px',
   },
   errorHelper: {
-    backgroundColor: white, // TODO: Fix, not working
+    // TODO: backgroundColor is not working as expected on the errorHelper on new-book-form
+    backgroundColor: white,
   },
   submitButton: {
     borderRadius: '15px',

@@ -5,13 +5,14 @@ import { Book, PaginatedBookList, DownloadLink } from './types';
 
 const bookDownloaderInstance = applyCaseMiddleware(
   axios.create({
+    // TODO: set book-downloader-api URL dynamically (ex: docker env var)
     baseURL: 'http://192.168.0.168:5000/',
+    // TODO: set book-downloader-api timeout dynamically (ex: docker env var)
     timeout: 1000,
   }),
 );
 
-// TODO: Put a catch statement in all actions
-
+// TODO: Put a catch statement in getBook
 export const getBook = (bookKey: string): Promise<Book> => bookDownloaderInstance
   .request<Book>({
     method: 'GET',
@@ -19,6 +20,8 @@ export const getBook = (bookKey: string): Promise<Book> => bookDownloaderInstanc
   })
   .then((result) => result.data);
 
+// TODO: Put a catch statement in getPaginatedBookList
+// TODO: Implement Order by on getPaginatedBookList
 export const getPaginatedBookList = (
   name?: string,
   status?: string,
@@ -39,6 +42,7 @@ export const getPaginatedBookList = (
   })
   .then((result) => result.data);
 
+// TODO: Put a catch statement in getBookURL
 export const getBookURL = (
   bookKey: string,
   expiry?: number,
@@ -52,6 +56,7 @@ export const getBookURL = (
   })
   .then((result) => result.data.downloadLink);
 
+// TODO: Put a catch statement in createBook
 export const createBook = (name: string, mask: string): Promise<Book> => bookDownloaderInstance
   .request<Book>({
     method: 'POST',

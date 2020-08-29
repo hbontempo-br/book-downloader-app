@@ -30,6 +30,8 @@ export function* newBook(action: NewBookRequestAction) { // eslint-disable-line
   }
 }
 
+// TODO: Check if function logic regarding timeout is correct
+// TODO: handle all status
 export function* monitorBook( // eslint-disable-line
   action: NewBookRequestSucceedAction, retry?: number,
   timeout?: number,
@@ -50,24 +52,20 @@ export function* monitorBook( // eslint-disable-line
       const rawResponse: Book = yield getBook(bookKey);
       switch (rawResponse.status) {
         case 'pending':
-          console.log('Monitoring: book status = pending');
           break;
         case 'finished':
-          console.log('Monitoring: book status = finished');
           yield put(newBookDownloadSucceed(bookKey));
           yield toast.success('Download Finished');
           return undefined;
         case 'error':
-          console.log('Monitoring: book status = error');
           yield put(newBookDownloadFailed(bookKey));
           yield toast.error('Download Failed');
           return undefined;
         default:
-          console.log(`Unknown book status = ${rawResponse.status}`);
           return undefined;
       }
       if (rawResponse.status === 'pending' && (retryTimeout - elapsedTime() < 0)) {
-        console.log('Monitoring timeout'); // Should call error redux
+        // Should call error redux
         return undefined;
       }
     } catch (err) {

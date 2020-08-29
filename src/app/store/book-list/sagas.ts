@@ -12,6 +12,8 @@ import {
 } from './types';
 // import { ApplicationState } from '../rootTypes';
 
+// TODO:  Change saga to a "updateBooks" witch receives nothing, this will make possible a
+//        auto refresh feature as well a auto refresh on new book actions side effects
 export function* filterBooks(action: FilterRequestAction) { // eslint-disable-line
   try {
     const rawResponse: PaginatedBookList = yield call(

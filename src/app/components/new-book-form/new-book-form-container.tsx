@@ -4,6 +4,7 @@ import { NewBookFormView } from './new-book-form-view';
 import { newBookRequest, selectNewBookState } from '../../store';
 import { NewBookFormValidation } from './new-book-form-types';
 
+// TODO: Clean form's name and URL fields upon successfully creating a book
 export const NewBookForm: React.FunctionComponent = () => {
   const dispatch = useDispatch();
   const {
@@ -37,7 +38,7 @@ export const NewBookForm: React.FunctionComponent = () => {
       pattern: {
         // Check if book link starts with https, if has the "pageN_" (N being an integer) and if
         // file extension in a valid image
-        // TODO: check valid file formats
+        // TODO: check valid file formats accepted by API
         value: /^(https)(.*?)(page\d+_)(.*?)(jpeg|png|jpg)$/i,
         message: 'Invalid URL pattern',
       },
@@ -50,14 +51,13 @@ export const NewBookForm: React.FunctionComponent = () => {
   };
 
   const checkFilenameExtension = (cleanName: string): string => (
-    // TODO: probably could do a better job cleaning up the book name
+    // TODO: probably could do a better job cleaning up the book name on new-book-form
     cleanName.endsWith('.pdf') ? cleanName : `${cleanName}.pdf`
   );
 
   const onSubmit = (): void => {
     const mask = convertURLToMask(url);
     const filename = checkFilenameExtension(name);
-    // TODO: check and force .pdf extension
     dispatch(newBookRequest(filename, mask));
   };
 

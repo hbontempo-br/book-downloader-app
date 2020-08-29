@@ -27,6 +27,9 @@ const downloadBook = (bookKey: string): void => {
   });
 };
 
+// TODO: Implement Ordination on book-table
+// TODO: Expose createdAt column on book-table
+// TODO: Create name (input) filter on book-table
 export const BookTable: React.FunctionComponent = () => {
   const {
     pagination,
@@ -34,26 +37,6 @@ export const BookTable: React.FunctionComponent = () => {
     books,
     totalCount,
   } = useSelector(selectBookListState, shallowEqual);
-  // const page = useSelector(
-  //   (state: ApplicationState) => booksState.booksState.pagination.page,
-  //   shallowEqual,
-  // );
-  // const rowsPerPage = useSelector(
-  //   (state: ApplicationState) => state.booksState.pagination.pageSize,
-  //   shallowEqual,
-  // );
-  // const count = useSelector(
-  //   (state: ApplicationState) => state.booksState.totalCount,
-  //   shallowEqual,
-  // );
-  // const book-list = useSelector(
-  //   (state: ApplicationState) => state.booksState.book-list,
-  //   shallowEqual,
-  // );
-  // const filter = useSelector(
-  //   (state: ApplicationState) => state.booksState.filter,
-  //   shallowEqual,
-  // );
   const dispatch = useDispatch();
   const rowsPerPageOptions = [10, 20, 30];
   const pageView = pagination.page - 1;

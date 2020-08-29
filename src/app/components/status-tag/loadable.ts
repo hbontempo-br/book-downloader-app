@@ -4,7 +4,8 @@
  *
  */
 
-// TODO: Not able to use absolute path on import. Fix.
+// TODO: Fix lazyload import on src/components/status-tag/loadable, for some reason absolute
+//  path is not working
 import { lazyLoad } from '../../../utils/loadable';
 
 export const GenericStatusTag = lazyLoad(
