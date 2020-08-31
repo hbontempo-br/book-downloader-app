@@ -1,0 +1,44 @@
+# Based on: https://gist.github.com/jkinkead/55db75d57df756c6d66b4c3f395df521
+
+####################################################################
+# Artifacts that will be built during image creation.
+# This should contain all files created during `npm run build`.
+build
+node_modules
+####################################################################
+
+
+####################################################################
+# Items that don't need to be in a Docker image.
+# Anything not used by the build system should go here.
+
+# Docker
+Dockerfile
+.dockerignore
+
+# Git
+.gitignore
+.gitattributes
+
+# IDEs
+.vscode
+.idea
+
+# Prettier
+.prettierignore
+.prettierrc
+.stylelintrc
+
+# NPM/NVM
+.nvmrc
+.npmrc
+
+# Eslint
+.eslintignore
+.eslintrc.js
+
+# Other stuff
+README.md
+.github
+
+####################################################################
