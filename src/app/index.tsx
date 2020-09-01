@@ -37,10 +37,10 @@ export function App(): JSX.Element {
       <BrowserRouter>
         <div className={classes.root}>
           <Helmet
-            titleTemplate="%s - React Boilerplate"
-            defaultTitle="React Boilerplate"
+            titleTemplate="%s - Book Downloader"
+            defaultTitle="Book Downloader App"
           >
-            <meta name="description" content="A React Boilerplate application" />
+            <meta name="description" content="Website for downloading a bunch of images in sequential links and creating a pdf. (Mostly for learning reasons)" />
           </Helmet>
           <Switch>
             <Route exact path="/" component={HomePage} />

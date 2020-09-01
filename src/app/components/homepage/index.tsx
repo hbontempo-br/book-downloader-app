@@ -10,7 +10,7 @@ export function HomePage(): JSX.Element {
     <>
       <Helmet>
         <title>Home Page</title>
-        <meta name="description" content="A Boilerplate application homepage" />
+        <meta name="description" content="Website for downloading a bunch of images in sequential links and creating a pdf. (Mostly for learning reasons)" />
       </Helmet>
       <div className={classes.root}>
         <Header />
