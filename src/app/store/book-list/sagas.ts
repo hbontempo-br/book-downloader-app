@@ -1,4 +1,4 @@
-import { call, put } from 'redux-saga/effects';
+import { call, put, select } from 'redux-saga/effects';
 import {
   getPaginatedBookList,
   PaginatedBookList,
@@ -8,22 +8,21 @@ import {
   filterSucceeded, filterFailed,
 } from './actions';
 import {
-  BookData, BooksPagination, FilterRequestAction,
+  BookData, BooksPagination,
 } from './types';
-// import { ApplicationState } from '../rootTypes';
+import { selectBookListState } from '../root-selectors';
 
-// TODO:  Change saga to a "updateBooks" witch receives nothing, this will make possible a
-//        auto refresh feature as well a auto refresh on new book actions side effects
-export function* filterBooks(action: FilterRequestAction) { // eslint-disable-line
+export function* updateBooks() { // eslint-disable-line
   try {
+    const bookListState = yield select(selectBookListState);
     const rawResponse: PaginatedBookList = yield call(
       getPaginatedBookList,
-      action.payload.filter.name,
-      action.payload.filter.status,
-      action.payload.pagination.page,
-      action.payload.pagination.pageSize,
-      action.payload.filter.orderBy,
-      action.payload.filter.orderDirection,
+      bookListState.name,
+      bookListState.filter.status,
+      bookListState.pagination.page,
+      bookListState.pagination.pageSize,
+      bookListState.filter.orderBy,
+      bookListState.filter.orderDirection,
     );
     const totalCount = rawResponse.pagination.totalRows;
     const pagination: BooksPagination = {
