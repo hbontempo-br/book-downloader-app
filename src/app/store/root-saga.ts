@@ -10,7 +10,7 @@ export default function* rootSaga() {
       NewBookActionTypes.NEW_BOOK_REQUEST_SUCCEEDED,
       NewBookActionTypes.NEW_BOOK_DOWNLOAD_FINISHED,
       NewBookActionTypes.NEW_BOOK_DOWNLOAD_FAILED,
-    ], updateBooks),
+    ], updateBooks), // TODO: How to cancel this side effect? It runs on loop
     takeEvery(NewBookActionTypes.NEW_BOOK_REQUEST, newBook),
     takeEvery(NewBookActionTypes.NEW_BOOK_REQUEST_SUCCEEDED, monitorBook),
   ]);

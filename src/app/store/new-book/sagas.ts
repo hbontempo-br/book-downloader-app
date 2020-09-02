@@ -1,5 +1,4 @@
 import {
-  // call,
   put,
   delay,
 } from 'redux-saga/effects';
@@ -17,7 +16,6 @@ import {
   NewBookRequestAction,
   NewBookRequestSucceedAction,
 } from './types';
-// import { ApplicationState } from '../rootTypes';
 
 export function* newBook(action: NewBookRequestAction) { // eslint-disable-line
   try {
@@ -38,7 +36,7 @@ export function* monitorBook( // eslint-disable-line
 ) {
   const { bookKey } = action.payload;
   const retryCount = retry || 5;
-  const retryTimeout = timeout || 600000;
+  const retryTimeout = timeout || 60000;
   const pollingInterval = 15000;
 
   const startTime = performance.now();

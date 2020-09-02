@@ -112,6 +112,7 @@ export const BookTable: React.FunctionComponent = () => {
     );
   };
 
+  // TODO: When unmounted refresh an action to cancel refresh of table should be called
   useEffect(() => {
     updateFilter(
       pagination.page,
