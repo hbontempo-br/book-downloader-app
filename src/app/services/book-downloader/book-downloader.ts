@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import applyCaseMiddleware from 'axios-case-converter';
 
 import { Book, PaginatedBookList, DownloadLink } from './types';
@@ -12,15 +12,28 @@ const bookDownloaderInstance = applyCaseMiddleware(
   }),
 );
 
-// TODO: Put a catch statement in getBook
 export const getBook = (bookKey: string): Promise<Book> => bookDownloaderInstance
   .request<Book>({
     method: 'GET',
     url: `/book/${bookKey}`,
   })
-  .then((result) => result.data);
+  .then((result) => result.data)
+  .catch((err: AxiosError) => {
+    // TODO: Create specific error classes to describe errors better
+    switch (err.response?.status) {
+      case 400:
+        throw err;
+      case 404:
+        throw err;
+      case 500:
+        throw err;
+      case 502:
+        throw err;
+      default:
+        throw err;
+    }
+  });
 
-// TODO: Put a catch statement in getPaginatedBookList
 // TODO: Implement Order by on getPaginatedBookList
 export const getPaginatedBookList = (
   name?: string,
@@ -40,9 +53,21 @@ export const getPaginatedBookList = (
       pageSize,
     },
   })
-  .then((result) => result.data);
+  .then((result) => result.data)
+  .catch((err: AxiosError) => {
+    switch (err.response?.status) {
+      // TODO: Create specific error classes to describe errors better
+      case 400:
+        throw err;
+      case 500:
+        throw err;
+      case 502:
+        throw err;
+      default:
+        throw err;
+    }
+  });
 
-// TODO: Put a catch statement in getBookURL
 export const getBookURL = (
   bookKey: string,
   expiry?: number,
@@ -54,9 +79,23 @@ export const getBookURL = (
       expiry,
     },
   })
-  .then((result) => result.data.downloadLink);
+  .then((result) => result.data.downloadLink)
+  .catch((err: AxiosError) => {
+    // TODO: Create specific error classes to describe errors better
+    switch (err.response?.status) {
+      case 400:
+        throw err;
+      case 404:
+        throw err;
+      case 500:
+        throw err;
+      case 502:
+        throw err;
+      default:
+        throw err;
+    }
+  });
 
-// TODO: Put a catch statement in createBook
 export const createBook = (name: string, mask: string): Promise<Book> => bookDownloaderInstance
   .request<Book>({
     method: 'POST',
@@ -66,4 +105,17 @@ export const createBook = (name: string, mask: string): Promise<Book> => bookDow
       mask,
     },
   })
-  .then((result) => result.data);
+  .then((result) => result.data)
+  .catch((err: AxiosError) => {
+    // TODO: Create specific error classes to describe errors better
+    switch (err.response?.status) {
+      case 400:
+        throw err;
+      case 500:
+        throw err;
+      case 502:
+        throw err;
+      default:
+        throw err;
+    }
+  });
