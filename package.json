@@ -31,7 +31,7 @@
     "i18next": "19.3.4",
     "i18next-browser-languagedetector": "4.0.2",
     "jest-styled-components": "7.0.2",
-    "lint-staged": "10.2.11",
+    "lint-staged": "13.0.4",
     "material-table": "1.62.0",
     "material-ui": "0.20.2",
     "node-plop": "0.25.0",
